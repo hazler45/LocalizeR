@@ -3,6 +3,7 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import RegisterPageAsUSer from "../RegisterAsUser/RegisterUser";
 import RegisterServiceProvider from "../RegisterAsServiceProvider/RegisterServiceProvider";
 export default function Register() {
+  const [selectedOption, setSelectedOption] = useState('User');
   return (
     <>
     <section className="grid md:flex  ">
@@ -28,11 +29,33 @@ export default function Register() {
               Please Register to enter LocailzeR{" "}
             </p>
           </div>
+          <div>
+          <label>
+                    <input 
+                        type="radio" 
+                        name="User" 
+                        value="User"
+                        checked={selectedOption === 'User'}
+                        onChange={() => setSelectedOption('User')} 
+                    />
+                    User
+                </label>
+                <label>
+                    <input 
+                        type="radio" 
+                        name="ServiceProvider" 
+                        value="Service Provider"
+                        checked={selectedOption === 'Service Provider'}
+                        onChange={() => setSelectedOption('Service Provider')} 
+                    />
+                    Service Provider
+                </label>
+          </div>
           {/* this is User register component */}
-      {/* <RegisterPageAsUSer/> */}
-
+          {selectedOption == "User" && <RegisterPageAsUSer/>}
+      
       {/* this is service provider register component */}
-      <RegisterServiceProvider/>
+      {selectedOption == "Service Provider" && <RegisterServiceProvider/>}
       
         </div>
       </div>

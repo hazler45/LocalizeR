@@ -55,7 +55,7 @@ export default function Register() {
           {selectedOption == "User" && <RegisterPageAsUSer/>}
       
       {/* this is service provider register component */}
-      {selectedOption == "Service Provider" && <RegisterServiceProvider/>}
+      <RegisterServiceProvider/>
       
         </div>
       </div>

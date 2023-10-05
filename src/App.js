@@ -3,9 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout/Layout";
 import LoginPage from './pages/Login/LoginPage';
 import Register from './pages/Register/Register';
-import RegisterAsUser from './pages/RegisterAsUser/RegisterAsUser'
+import RegisterAsUser from './pages/RegisterAsUser/RegisterAsUser';
 import RegisterPageAsUSerContinue from "./pages/RegisterAsUser/RegisterAsUserContinue";
-import RegisterUserAsServiceProvider from './pages/RegisterAsServiceProvider/RegisterServiceProvider'
+import RegisterUserAsServiceProvider from './pages/RegisterAsServiceProvider/RegisterServiceProvider';
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
         <Route path="/registerAsUserContinue" element={<RegisterPageAsUSerContinue/>} />
         <Route path="/registerAsUser" element={<RegisterAsUser/>} />
         <Route path="/registerAsServiceProvider" element={<RegisterUserAsServiceProvider/>} />
-       
       </Routes>
     </>
   );

@@ -84,6 +84,7 @@ export default function RegisterAsServiceProviderContinue() {
               <label
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900"
+                required
               >
                 Password
               </label>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { MdKeyboardBackspace } from "react-icons/md";
 export default function RegidterAsUserContinue() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -10,30 +9,7 @@ export default function RegidterAsUserContinue() {
 
   return (
     <>
-      <section className="grid md:flex  ">
-        <div className="md:w-2/6 w-full ">
-          <div className="bg-heroImg bg-no-repeat p-20 md:h-screen ">
-          <div>
-              <a href="/registerAsUser">
-                <MdKeyboardBackspace className="text-white text-2xl" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="px-16 pt-14  items-center  justify-center">
-          <div className=" space-y-4 md:space-y-6 sm:p-8 ">
-            <div>
-              <p className="text-xl  leading-tight tracking-tight text-gray-900 md:text-3xl flex">
-                Get Started with
-                <a className=" pb-1 font-bold pl-2" href="/">
-                  LocalizeR
-                </a>
-              </p>
-              <p className="text-gray-600 pb-2">
-                Please Register to enter LocailzeR{" "}
-              </p>
-            </div>
-            <div className="  items-center  justify-center">
+       <div className="  items-center  justify-center">
           <div className=" space-y-4 md:space-y-6 ">
             <form className="space-y-4 md:space-y-6" action="#">
               <div>
@@ -115,9 +91,7 @@ export default function RegidterAsUserContinue() {
             </form>
           </div>
         </div>
-          </div>
-        </div>
-      </section>
+      
     </>
   );
 }

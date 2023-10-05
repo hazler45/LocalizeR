@@ -37,7 +37,7 @@ export class NavMenu extends Component {
 
   toggleServicesDropdown() {
     this.setState({
-      servicesDropdownOpen: !this.state.servicesDropdownOpen, // Toggle dropdown state
+      servicesDropdownOpen: !this.state.servicesDropdownOpen,
     });
   }
 
@@ -52,7 +52,11 @@ export class NavMenu extends Component {
           container
           light
         >
-          <NavbarBrand tag={Link} to="/" className="pr-12">
+          <NavbarBrand
+            tag={Link}
+            to="/"
+            className="pr-12 font-semibold text-2xl text-blue-500"
+          >
             LocalizeR
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -62,19 +66,17 @@ export class NavMenu extends Component {
             navbar
           >
             <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">
+              {/* <NavItem>
+                <NavLink tag={Link} className="text-white" to="/">
                   Home
                 </NavLink>
-              </NavItem>
-              {/* <NavItem>
-                <NavLink tag={Link} className="text-dark" to="#">Services</NavLink>
               </NavItem> */}
+
               <Dropdown
                 isOpen={this.state.servicesDropdownOpen}
                 toggle={this.toggleServicesDropdown}
               >
-                <DropdownToggle tag="a" className="nav-link text-dark" caret>
+                <DropdownToggle tag="a" className="nav-link text-white" caret>
                   Services
                 </DropdownToggle>
                 <DropdownMenu>
@@ -91,19 +93,24 @@ export class NavMenu extends Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="#">
+                <NavLink tag={Link} className="text-white" to="#">
+                  About Us
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-white" to="#">
                   Contact Us
                 </NavLink>
               </NavItem>
               <div className="md:ml-auto md:flex ">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">
+                  <NavLink tag={Link} className="text-white" to="/login">
                     LoginPage
                   </NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/register">
+                  <NavLink tag={Link} className="text-white" to="/register">
                     Register
                   </NavLink>
                 </NavItem>

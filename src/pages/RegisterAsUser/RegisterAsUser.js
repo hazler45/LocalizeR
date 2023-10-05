@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import RegisterAsUserContinue from "./RegisterAsUserContinue";
-
 export default function RegisterPageAsUSer({ onContinueClick }) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

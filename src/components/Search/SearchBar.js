@@ -12,7 +12,7 @@ const SearchBar = ({ onSearch }) => {
     <div className="relative flex text-gray-600">
       <input
         type="text"
-        className="border-2  border-gray-300 bg-white h-10 px-5 pr-16 rounded-r-none text-sm focus:outline-none"
+        className="bg-white h-10 px-5 pr-16 rounded-r-none text-sm focus:outline-none"
         placeholder="Search..."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}

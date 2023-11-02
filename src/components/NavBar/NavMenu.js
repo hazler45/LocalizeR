@@ -20,7 +20,6 @@ export class NavMenu extends Component {
 
   constructor(props) {
     super(props);
-
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleServicesDropdown = this.toggleServicesDropdown.bind(this);
     this.state = {
@@ -48,14 +47,14 @@ export class NavMenu extends Component {
           <SearchBar />
         </div>
         <Navbar
-          className="navbar-expand-md navbar-toggleable-md  border-bottom  mb-3"
+          className="navbar-expand-md navbar-toggleable-md"
           container
           light
         >
           <NavbarBrand
             tag={Link}
             to="/"
-            className="pr-12 font-semibold text-2xl text-blue-500"
+            className="pr-12 font-semibold text-2xl text-orange-400"
           >
             LocalizeR
           </NavbarBrand>

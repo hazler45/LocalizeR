@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch }) => {
       />
       <button
             type="submit"
-            className="flex justify-center text-white  bg-blue-700 hover:bg-blue-800 font-medium rounded-r-md text-sm px-3 py-2"
+            className="flex justify-center text-white  bg-orange-700 hover:bg-orange-800 font-medium rounded-r-md text-sm px-3 py-2"
           >
             <div className=" flex items-center">
               <svg

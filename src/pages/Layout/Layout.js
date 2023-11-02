@@ -1,9 +1,11 @@
 import React from "react";
-import { NavMenu } from "../../components/NavBar/NavMenu";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { NavMenu } from "../../components/NavBar/NavMenu";
 import Footer from "../../components/Footer/Footer";
+import Card from "../../components/Card/Card";
+import './Layout.module.css'
 export default function LandingPage() {
   const sliderSettings = {
     dots: true,
@@ -26,7 +28,7 @@ export default function LandingPage() {
   return (
     <>
       <div className=" pt-8 px-28 selection:" style={landingPageStyle}>
-      {/* this is navbar */}
+        {/* this is navbar */}
         <NavMenu />
         {/* slider header */}
         <Slider {...sliderSettings}>
@@ -39,7 +41,7 @@ export default function LandingPage() {
               <p className="text-40 mb-8  text-gray-200 font-semibold">
                 Slide 1 Description
               </p>
-              <button className=" bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-sm font-semibold">
+              <button className=" bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-sm font-semibold">
                 Explore
               </button>
             </div>
@@ -53,18 +55,23 @@ export default function LandingPage() {
               <p className="text-40 mb-8  text-gray-200 font-semibold">
                 Slide 2 Description
               </p>
-              <button className=" bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-sm font-semibold">
+              <button className=" bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-sm font-semibold">
                 Explore
               </button>
             </div>
           </div>
         </Slider>
       </div>
-      <div className="py-32">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consequatur ipsam mollitia quos non voluptatibus, nesciunt eligendi debitis 
-        nulla corrupti dolore, sint provident minus quibusdam molestiae, dicta dignissimos! Voluptate, earum.
+      <div className="py-32 px-28 " >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+        consequatur ipsam mollitia quos non voluptatibus, nesciunt eligendi
+        debitis nulla corrupti dolore, sint provident minus quibusdam molestiae,
+        dicta dignissimos! Voluptate, earum.
       </div>
-    <Footer/>
+      <div className="grid grid-cols-4 gap-4 px-28 ">
+        <Card />
+      </div>
+      <Footer />
     </>
   );
 }

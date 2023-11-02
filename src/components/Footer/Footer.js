@@ -8,7 +8,7 @@ export default function Footer() {
     <div class="mx-auto  w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
-             <p className=" font-semibold text-2xl text-blue-500"> LocalizeR</p>
+             <p className=" font-semibold text-2xl text-orange-400"> LocalizeR</p>
           </div>
           <div class="flex  gap-6 sm:gap-12 sm:grid-cols-3">
               <div >

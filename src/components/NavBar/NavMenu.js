@@ -47,7 +47,7 @@ export class NavMenu extends Component {
           <SearchBar />
         </div>
         <Navbar
-          className="navbar-expand-md navbar-toggleable-md"
+          className="navbar-expand-lg navbar-toggleable-md"
           container
           light
         >
@@ -92,7 +92,7 @@ export class NavMenu extends Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <NavLink tag={Link} className="text-white" to="#">
+                <NavLink tag={Link} className="text-white" to="/about">
                   About Us
                 </NavLink>
               </NavItem>

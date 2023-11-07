@@ -62,13 +62,10 @@ export default function LandingPage() {
           </div>
         </Slider>
       </div>
-      <div className="py-32 px-28 " >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-        consequatur ipsam mollitia quos non voluptatibus, nesciunt eligendi
-        debitis nulla corrupti dolore, sint provident minus quibusdam molestiae,
-        dicta dignissimos! Voluptate, earum.
+      <div className="py-12 px-28 " >
+      LocalizeR is an online platform that serves as a space for connecting users to service providers. A service provider module can be an independent person or a group of people. The main theme behind this project is to help users find a proper household service, which for now is limited to a certain domain.
       </div>
-      <div className="grid grid-cols-4 gap-4 px-28 ">
+      <div className="grid md:grid-cols-4 grid-cols-2 gap-4 px-28 ">
         <Card />
       </div>
       <Footer />

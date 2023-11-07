@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { MdKeyboardBackspace } from "react-icons/md";
 import RegisterAsServiceProviderContinue from "./RegisterAsServiceProviderContinue";
 export default function RegisterAsServiceProvider({ onContinueClick }) {
   const [password, setPassword] = useState("");

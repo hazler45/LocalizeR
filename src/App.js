@@ -6,6 +6,7 @@ import Register from './pages/Register/Register';
 import RegisterAsUser from './pages/RegisterAsUser/RegisterAsUser';
 import RegisterPageAsUSerContinue from "./pages/RegisterAsUser/RegisterAsUserContinue";
 import RegisterUserAsServiceProvider from './pages/RegisterAsServiceProvider/RegisterServiceProvider';
+import AboutUs from "./pages/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/registerAsUserContinue" element={<RegisterPageAsUSerContinue/>} />
         <Route path="/registerAsUser" element={<RegisterAsUser/>} />
         <Route path="/registerAsServiceProvider" element={<RegisterUserAsServiceProvider/>} />
+        <Route path="/about" element={<AboutUs/>} />
       </Routes>
     </>
   );

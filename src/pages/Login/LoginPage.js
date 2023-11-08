@@ -96,7 +96,7 @@ export default function LoginPage() {
 
                 <a
                   href="#"
-                  className="text-sm font-medium text-primary-600 text-blue-400 hover:underline "
+                  className="text-sm font-medium text-primary-600 text-orange-400 hover:underline "
                 >
                   Forgot password?
                 </a>
@@ -104,7 +104,7 @@ export default function LoginPage() {
               <div className="pt-8">
                 <button
                   type="submit"
-                  className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-md px-5 py-2.5 text-center"
+                  className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-md px-5 py-2.5 text-center"
                 >
                   Log in
                 </button>
@@ -113,7 +113,7 @@ export default function LoginPage() {
                 Don’t have an account yet?{" "}
                 <a
                   href="/Register"
-                  className="font-semibold  hover:underline text-blue-600"
+                  className="font-semibold  hover:underline text-orange-700"
                 >
                   Register
                 </a>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MdKeyboardBackspace } from "react-icons/md";
-import RegisterPageAsUser from "../RegisterAsUser/RegisterUser";
+import RegisterPageAsUser from "../RegisterAsUser/RegisterAsUser";
 import RegisterServiceProvider from "../RegisterAsServiceProvider/RegisterServiceProvider";
 
 export default function Register() {
@@ -14,7 +14,7 @@ export default function Register() {
     <>
       <section className="grid md:flex ">
         <div className="md:w-2/6 w-full ">
-          <div className="bg-heroImg bg-no-repeat px-20 py-10 md:h-screen ">
+          <div className="bg-heroImg bg-no-repeat px-20 py-10 md:h-full ">
             <div>
               <a href="/">
                 <MdKeyboardBackspace className="text-white text-2xl" />
@@ -31,33 +31,39 @@ export default function Register() {
                   LocalizeR
                 </a>
               </p>
-              <p className="text-gray-600">Please Register to enter LocalizeR </p>
+              <p className="text-gray-600">
+                Please Register to enter LocalizeR{" "}
+              </p>
             </div>
 
-            <div >
+            <div className="grid">
               <label>
+                User
                 <input
                   type="radio"
                   value="User"
                   checked={selectedOption === "User"}
                   onChange={handleOptionChange}
+                  className="w-2/4"
                 />
-                User
               </label>
-              <label >
-                <input 
+              <label>
+                Service Provider
+                <input
                   type="radio"
                   value="ServiceProvider"
                   checked={selectedOption === "ServiceProvider"}
                   onChange={handleOptionChange}
+                  className="w-1/4"
                 />
-                Service Provider
               </label>
             </div>
 
             {/* Render the appropriate registration component based on selectedOption */}
             {selectedOption === "User" && <RegisterPageAsUser />}
-            {selectedOption === "ServiceProvider" && <RegisterServiceProvider />}
+            {selectedOption === "ServiceProvider" && (
+              <RegisterServiceProvider />
+            )}
           </div>
         </div>
       </section>

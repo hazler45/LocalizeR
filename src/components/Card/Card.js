@@ -8,7 +8,7 @@ export default function Card() {
         return (
           <div className="">
             <div
-              className="p-6 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
+              className="p-4 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
             >
               <div className="">
                 <h3 className="font-semibold text-lg">{data.title}</h3>

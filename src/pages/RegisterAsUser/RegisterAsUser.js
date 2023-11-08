@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import RegisterAsUserContinue from "./RegisterAsUserContinue";
 export default function RegisterPageAsUSer({ onContinueClick }) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showRegisterAsUserContinue, setShowRegisterAsUserContinue] =
-    useState(false);
-  const handleContinueClick = () => {
-    setShowRegisterAsUserContinue(true);
-    if (typeof onContinueClick === "function") {
-      onContinueClick();
-    }
-  };
  const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -34,7 +25,7 @@ export default function RegisterPageAsUSer({ onContinueClick }) {
             required=""
           />
         </div>
-        <div>
+        {/* <div>
           <label
             for="username"
             class="block mb-2 text-sm font-medium text-gray-900"
@@ -49,7 +40,7 @@ export default function RegisterPageAsUSer({ onContinueClick }) {
             placeholder="Enter your username"
             required=""
           />
-        </div>
+        </div> */}
         <div>
           <label
             for="location"
@@ -96,16 +87,36 @@ export default function RegisterPageAsUSer({ onContinueClick }) {
             required=""
           />
         </div>
-        <div className="pt-8">
-          <button
-            onClick={handleContinueClick}
-            type="submit"
-            className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg  px-5 py-2.5 text-center"
-          >
-            Continue
-          </button>
-          {showRegisterAsUserContinue && <RegisterAsUserContinue />}
-        </div>
+        <div>
+                <label
+                  for="password"
+                  class="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Confrim Password
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  onChange={handlePasswordChange}
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                  required=""
+                />
+                {password.length < 8 && (
+                  <p className="text-gray-600 text-xs">
+                    Password must be 8 characters long
+                  </p>
+                )}
+              </div>
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg  px-5 py-2.5 text-center"
+                >
+                 Register
+                </button>
+              </div>
         <p className="text-sm font-light text-gray-600 ">
           Don’t have an account yet?{" "}
           <a

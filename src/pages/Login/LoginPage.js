@@ -8,15 +8,23 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: '',
-    email: '',
+    username: ''
     // Add more fields as needed
   });
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleLoginClick =  () => {
-    axios.post('http://localhost:5178/api/account/login', formData)
+  const handlePasswordChange = (e) => {
+    setFormData({ ...formData, password: e.target.value });
+  };
+  const handleLoginClick =  async(e) => {
+    e.preventDefault();
+    console.log("Before Axios Request");
+    await axios.post('http://localhost:5178/api/account/Login', formData,{
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
   .then(response => {
     navigate('/');
     console.log(response.data);
@@ -25,6 +33,7 @@ export default function LoginPage() {
     // Handle errors here
     console.error('Error:', error);
   });
+  console.log("After Axios Request");
   };
 
   return (
@@ -60,15 +69,16 @@ export default function LoginPage() {
                   for="username"
                   class="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Email
+                  Username
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  value= {formData.email}
-                  id="email"
+                  name="username"
+                  value= {formData.username}
+                  onChange={handleChange}
+                  id="username"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  placeholder="Enter your email"
+                  placeholder="Enter your Username"
                   required=""
                 />
               </div>

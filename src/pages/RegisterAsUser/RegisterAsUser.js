@@ -24,6 +24,7 @@ export default function RegisterPageAsUSer() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  
   const handleRegisterClick = async (e) => {
     e.preventDefault();
   console.log("Before Axios Post");

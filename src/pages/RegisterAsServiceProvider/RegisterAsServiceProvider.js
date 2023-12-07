@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import axios  from "axios";
+import { useNavigate } from "react-router-dom";
 export default function RegisterAsServiceProvider() {
   const [formData, setFormData] = useState({
     selectedService: '',
     username: '',
     password: '',
+    confirmpassword:'',
     email: '',
     businessname: '',
     contactno: '',
-    location:'',
+    location:''
 
     // Other form fields can be added here
   });
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [password,setPassword]= useState("");
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handleConfirmPasswordChange = (e) => {
+    const newConfirmPassword = e.target.value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      confirmpassword: newConfirmPassword,
+    }));
   };
   const handleInputChange = (e) => {
     setFormData({
@@ -23,7 +30,24 @@ export default function RegisterAsServiceProvider() {
     });
   };
 
- const handleContinueClick = () => {
+ const handleContinueClick =async (e) => {
+  e.preventDefault();
+  console.log("Before Axios Post");
+   await axios.post('http://localhost:5178/api/Account/RegisterServiceProvider', formData, {
+    headers:
+    {
+      'Content-Type': 'application/json'
+    },
+   })
+  .then(response => {
+    navigate('/login');
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handle errors here
+    console.error('Error:', error);
+  });
+  console.log("After Axios Post");
     // Your logic for handleContinueClick
   };
   const handleServiceChange = (e) => {
@@ -62,8 +86,8 @@ export default function RegisterAsServiceProvider() {
           </label>
           <input
             type="email"
-            name="Email"
-            value={formData.Email}
+            name="email"
+            value={formData.email}
             id="email"
             onChange={handleInputChange}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -179,13 +203,14 @@ export default function RegisterAsServiceProvider() {
             name="confirmpassword"
             id="confirmpassword"
             value={formData.confirmpassword}
-            onChange={handleInputChange}
-            placeholder="Enter your phone no"
+            onChange={handleConfirmPasswordChange}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
             required=""
           />
+          {formData.password !== formData.confirmpassword &&(
+                    <p className="text-red-500 text-xs">Passwords do not match.</p>
+                )}
         </div>
-
         <div>
           <div className="pt-4">
             <button

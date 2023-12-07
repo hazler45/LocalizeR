@@ -5,7 +5,6 @@ import LoginPage from './pages/Login/LoginPage';
 import Register from './pages/Register/Register';
 import RegisterAsUser from './pages/RegisterAsUser/RegisterAsUser';
 import RegisterAsServiceProvider from './pages/RegisterAsServiceProvider/RegisterServiceProvider';
-import RegisterAsServiceProviderContinue from "./pages/RegisterAsServiceProvider/RegisterAsServiceProviderContinue";
 import AboutUs from "./pages/AboutUs/AboutUs";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/registerAsUser" element={<RegisterAsUser/>} />
          <Route path="/registerAsServiceProvider" element={<RegisterAsServiceProvider /> } />
-        <Route path="/registerAsServiceProviderContinue" element={<RegisterAsServiceProviderContinue /> } />
         <Route path="/about" element={<AboutUs/>} />
       </Routes>
     </>

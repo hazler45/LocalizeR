@@ -3,14 +3,14 @@ import axios  from "axios";
 import { useNavigate } from "react-router-dom";
 export default function RegisterAsServiceProvider() {
   const [formData, setFormData] = useState({
-    selectedService: '',
     username: '',
-    password: '',
-    confirmpassword:'',
     email: '',
     businessname: '',
     contactno: '',
-    location:''
+    location:'',
+    selectedService: '',
+    password: '',
+    confirmpassword:'',
 
     // Other form fields can be added here
   });
@@ -30,9 +30,10 @@ export default function RegisterAsServiceProvider() {
     });
   };
 
- const handleContinueClick =async (e) => {
+ const handleContinueClick = async (e) => {
   e.preventDefault();
   console.log("Before Axios Post");
+  console.log("formData: ", formData)
    await axios.post('http://localhost:5178/api/Account/RegisterServiceProvider', formData, {
     headers:
     {
@@ -58,20 +59,20 @@ export default function RegisterAsServiceProvider() {
   };
   return (
     <>
-      <form className="space-y-4 md:space-y-4" action="#">
+      <form className="space-y-4 md:space-y-4" >
         <div>
           <label
             htmlFor="username"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             User Name
           </label>
           <input
             type="text"
-            name="Username"
+            name="username"
             id="username"
             onChange={handleInputChange}
-            value={formData.Username}
+            value={formData.username}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
             placeholder="Enter your username"
             required=""
@@ -80,7 +81,7 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="email"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Email
           </label>
@@ -98,13 +99,13 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="business"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Business Name
           </label>
           <input
             type="text"
-            name="business"
+            name="businessname"
             value={formData.businessname}
             onChange={handleInputChange}
             id="business"
@@ -116,13 +117,13 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="contact"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Contact
           </label>
           <input
             type="text"
-            name="contact"
+            name="contactno"
             id="contact"
             value={formData.contactno}
             onChange={handleInputChange}
@@ -134,7 +135,7 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="location"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Location
           </label>
@@ -164,8 +165,8 @@ export default function RegisterAsServiceProvider() {
             <div key={service} className="radio-option">
               <input
                 type="radio"
-                id={service}
-                name="serviceType"
+                id={`service_${service}`}
+                name="selectedService"
                 value={service}
                 checked={formData.selectedService === service}
                 onChange={handleServiceChange}
@@ -177,7 +178,7 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="password"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Password
           </label>
@@ -194,7 +195,7 @@ export default function RegisterAsServiceProvider() {
         <div>
           <label
             htmlFor="confirmpassword"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Confirm Password
           </label>
@@ -215,7 +216,7 @@ export default function RegisterAsServiceProvider() {
           <div className="pt-4">
             <button
               onClick={handleContinueClick}
-              type="submit"
+              type="button"
               className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-md  px-5 py-2.5 text-center"
             >
               Continue

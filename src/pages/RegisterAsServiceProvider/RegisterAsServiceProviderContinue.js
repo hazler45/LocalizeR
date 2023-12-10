@@ -6,11 +6,9 @@ import {
 export default function RegisterAsServiceProviderContinue() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
   return (
     <>
       <div className="  items-center  justify-center">

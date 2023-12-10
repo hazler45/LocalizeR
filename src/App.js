@@ -6,7 +6,8 @@ import Register from './pages/Register/Register';
 import RegisterAsUser from './pages/RegisterAsUser/RegisterAsUser';
 import RegisterUserAsServiceProvider from './pages/RegisterAsServiceProvider/RegisterServiceProvider';
 import AboutUs from "./pages/AboutUs/AboutUs";
-
+import Contact from './pages/Contact/ContactPage';
+import MakeReservationbyUser from './pages/MakeReservation/MakeReservationbyUser';
 function App() {
   return (
     <>
@@ -18,6 +19,8 @@ function App() {
         <Route path="/registerAsUser" element={<RegisterAsUser/>} />
         <Route path="/registerAsServiceProvider" element={<RegisterUserAsServiceProvider/>} />
         <Route path="/about" element={<AboutUs/>} />
+        <Route path="/contact" element={<Contact/>} />
+        <Route path="/reservation" element={<MakeReservationbyUser/>} />
       </Routes>
     </>
   );

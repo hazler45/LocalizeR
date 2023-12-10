@@ -40,8 +40,11 @@ export class NavMenu extends Component {
     });
   }
 
-  render() {
+  render() 
+  
+  {
     return (
+      
       <header>
         <div className="flex place-content-center pb-4">
           <SearchBar />
@@ -66,7 +69,7 @@ export class NavMenu extends Component {
           >
             <ul className="navbar-nav flex-grow">
               {/* <NavItem>
-                <NavLink tag={Link} className="text-white" to="/">
+                <NavLink tag={Link} className="text-orange-400" to="/">
                   Home
                 </NavLink>
               </NavItem> */}
@@ -75,7 +78,7 @@ export class NavMenu extends Component {
                 isOpen={this.state.servicesDropdownOpen}
                 toggle={this.toggleServicesDropdown}
               >
-                <DropdownToggle tag="a" className="nav-link text-white" caret>
+                <DropdownToggle tag="a" className="nav-link text-orange-400" caret>
                   Services
                 </DropdownToggle>
                 <DropdownMenu>
@@ -92,24 +95,24 @@ export class NavMenu extends Component {
                 </DropdownMenu>
               </Dropdown>
               <NavItem>
-                <NavLink tag={Link} className="text-white" to="/about">
+                <NavLink tag={Link} className="text-orange-400" to="/about">
                   About Us
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-white" to="#">
+                <NavLink tag={Link} className="text-orange-400" to="/contact">
                   Contact Us
                 </NavLink>
               </NavItem>
               <div className="md:ml-auto md:flex ">
                 <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/login">
+                  <NavLink tag={Link} className="text-orange-400" to="/login">
                     LoginPage
                   </NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/register">
+                  <NavLink tag={Link} className="text-orange-400" to="/register">
                     Register
                   </NavLink>
                 </NavItem>

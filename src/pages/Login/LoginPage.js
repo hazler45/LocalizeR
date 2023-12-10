@@ -1,13 +1,47 @@
-import React from "react";
+import React,{useState} from "react";
 import { MdKeyboardBackspace } from "react-icons/md";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import { Input } from "../../components/Input/FromInput";
 import { useForm, FormProvider } from "react-hook-form";
 export default function LoginPage() {
   const methods = useForm();
-
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);
   });
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    password: '',
+    username: ''
+    // Add more fields as needed
+  });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handlePasswordChange = (e) => {
+    setFormData({ ...formData, password: e.target.value });
+  };
+  const handleLoginClick =  async(e) => {
+    e.preventDefault();
+    console.log("Before Axios Request");
+    await axios.post('http://localhost:5178/api/account/Login', formData,{
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+  .then(response => {
+    navigate('/');
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handle errors here
+    console.error('Error:', error);
+  });
+  console.log("After Axios Request");
+  };
+
   return (
     <>
       <section className="grid md:flex  ">

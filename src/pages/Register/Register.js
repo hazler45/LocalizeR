@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdKeyboardBackspace } from "react-icons/md";
 import RegisterPageAsUser from "../RegisterAsUser/RegisterAsUser";
-import RegisterServiceProvider from "../RegisterAsServiceProvider/RegisterServiceProvider";
+import RegisterAsServiceProvider from "../RegisterAsServiceProvider/RegisterAsServiceProvider";
 
 export default function Register() {
   const [selectedOption, setSelectedOption] = useState("User");
@@ -62,7 +62,7 @@ export default function Register() {
             {/* Render the appropriate registration component based on selectedOption */}
             {selectedOption === "User" && <RegisterPageAsUser />}
             {selectedOption === "ServiceProvider" && (
-              <RegisterServiceProvider />
+             <RegisterAsServiceProvider/>
             )}
           </div>
         </div>

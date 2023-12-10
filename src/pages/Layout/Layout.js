@@ -35,11 +35,11 @@ export default function LandingPage() {
           <div className="slider-item">
             <div className="slider-content px-28 py-32">
               <h3 className="text-6xl  mb-2 text-white font-bold">
-                Lorem Ispum is
-                <br /> a Dummy Text.
+                Welcome to
+                <br /> LocalizeR
               </h3>
               <p className="text-40 mb-8  text-gray-200 font-semibold">
-                Slide 1 Description
+                One Easy Junction For The Best
               </p>
               <button className=" bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-sm font-semibold">
                 Explore
@@ -49,11 +49,11 @@ export default function LandingPage() {
           <div className="slider-item">
             <div className="slider-content px-28 py-32">
               <h3 className="text-6xl mb-2 text-white font-bold">
-                Lorem Ispum is
-                <br /> a Dummy Text.
+                Find The Best
+                <br /> Local Services
               </h3>
               <p className="text-40 mb-8  text-gray-200 font-semibold">
-                Slide 2 Description
+                Compare service providers to your benifit
               </p>
               <button className=" bg-orange-700 hover:bg-orange-800 text-white px-4 py-2 rounded-sm font-semibold">
                 Explore

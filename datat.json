@@ -1,0 +1,53 @@
+{"user":[
+    {"id":1,
+    "name":"Anisha Shresths",
+    "service":"hvac",
+    "price":518537.82
+    
+},
+{
+    "id":2,
+    "name":"Amos Limbu",
+    "service":"hvac",
+    "price":715334.58
+    
+},
+{
+    "id":3,
+    "name":"Anvesha giri",
+    "service":"electrician",
+    "price":476050.33
+},
+{
+    "id":4,
+    "name":"Ayush Pandey",
+    "service":"furniture",
+    "price":76683
+},
+{
+    "id":5,
+    "name":"Aerika rai",
+    "service":"furniture",
+    "price":97552
+},
+{
+    "id":6,
+    "name":"Sonam lama",
+    "service":"electrician",
+    "price":55874
+},
+{
+    "id":7,
+    "name":"Maneeka rai",
+    "service":"furniture",
+    "price":30836
+},
+{
+    "id":8,
+    "name":"Anusha Nepal",
+    "service":"electrician",
+    "price":86348
+   
+    }
+]
+}

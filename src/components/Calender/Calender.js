@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-const Calendar = () => {
+
+const Calendar = ({ onChange })  => {
 	const [selectedDateTime, setSelectedDateTime] = useState(null);
-  
+    
 	return (
 	  <div className="datetime-input-container">
 		<DatePicker
 		className=' p-2'
 		  selected={selectedDateTime}
-		  onChange={(date) => setSelectedDateTime(date)}
+		  onChange={(date) =>
+			{ setSelectedDateTime(date);
+				onChange(date);}}
 		  showTimeSelect
 		  timeFormat="HH:mm"
 		  timeIntervals={15}

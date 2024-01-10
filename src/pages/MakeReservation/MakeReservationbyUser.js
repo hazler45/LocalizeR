@@ -4,29 +4,43 @@ import Calendar from "../../components/Calender/Calender";
 import Comment from "./comments";
 import { reservationData } from "../../map/data.js";
 export default function MakeReservationbyUser() {
+  const [budget, setBudget] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
 
   const handleDateChange = (newDate) => {
+    console.log("Selected Date:", newDate);
     setDate(newDate);
   };
+  
   // Event handler for changes in the description input
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
+
+  const handleBudgetChange = (e) => {
+    setBudget(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
+      // Get the value of the budget input
+      const budgetInput = document.getElementById("budgetInput").value;
+  
+      // Log the data to the console
+      console.log("Reservation Data:", { date, description, budget: budgetInput });
+  
       // Send the reservation data to the server
       const response = await fetch("/api/reservations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ date, description }),
+        body: JSON.stringify({ date, description, budget: budgetInput }),
       });
-
+  
       if (response.ok) {
         console.log("Reservation saved successfully");
         // Optionally, you can redirect or update the UI here
@@ -37,10 +51,11 @@ export default function MakeReservationbyUser() {
       console.error("Error submitting reservation:", error);
     }
   };
+  
   return (
     <>
       <div className=" pt-8 px-28 ">
-        <NavMenu/>
+        <NavMenu />
         {reservationData.map((data) => (
           <div className="grid lg:flex gap-4 pt-12" key={data.id}>
             <section className="lg:w-2/4">
@@ -55,8 +70,12 @@ export default function MakeReservationbyUser() {
             </section>
             <div className="lg:w-3/4 ">
               <div className="text-gray-600">
-              
-                <h1 className="font-bold text-2xl pb-2 text-gray-800"><h1 className="text-gray-600 font-medium text-base">About the business :</h1>  {data.businessName }</h1>
+                <h1 className="font-bold text-2xl pb-2 text-gray-800">
+                  <h1 className="text-gray-600 font-medium text-base">
+                    About the business :
+                  </h1>{" "}
+                  {data.businessName}
+                </h1>
                 <p className="text-gray-600">{data.aboutBusiness}</p>
               </div>
               <div className="lg:flex pt-4 gap-8">
@@ -69,13 +88,30 @@ export default function MakeReservationbyUser() {
                       {" "}
                       Make Reservation
                     </h1>
-                    <label className=" text-sm font-medium text-gray-900 ">
-                      Select time and date
-                    </label>
-                    <Calendar onChange={handleDateChange} />
+                    <div className="flex gap-4">
+                      <div>
+                        <label className=" text-sm font-medium text-gray-900 ">
+                          Select time and date
+                        </label>
+                        <Calendar onChange={handleDateChange} />
+                      </div>
+                      <div>
+                        <label className=" text-sm font-medium text-gray-900 ">
+                          Budget
+                        </label>
+                        <input
+                          type="number"
+                          id="budgetInput"
+                          className="p-2.5 rounded-lg w-full"
+                          placeholder="Enter budget in NPR"
+                          value={budget}
+                          onChange={handleBudgetChange}
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div className="mb-2">
-                    <label className="  text-sm font-medium text-gray-900 ">
+                    <label className=" text-sm font-medium text-gray-900 ">
                       Description of Work
                     </label>
                     <textarea

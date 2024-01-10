@@ -14,7 +14,7 @@ export default function Card() {
         return (
           <div className="">
             <div
-              className="p-4 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
+              className="p-2.5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
             >
               <div className="">
                 <a href="">
@@ -37,6 +37,7 @@ export default function Card() {
                     </div>
                   ))}
                 </div>
+          
                 <h5 className="  py-2 tracking-tight text-gray-700 ">
                   {data.description}
                 </h5>

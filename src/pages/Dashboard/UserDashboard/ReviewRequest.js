@@ -1,6 +1,5 @@
 import React from "react";
-import { NavMenu } from "../../../components/NavBar/NavMenu";
-import Footer from "../../../components/Footer/Footer";
+import UserSidebar from "../UserDashboard/UserSidebar";
 import { Link } from "react-router-dom";
 export default function ReviewRequest() {
   const reservationData = [
@@ -14,8 +13,10 @@ export default function ReviewRequest() {
 
   return (
     <>
-      <div className="pt-8 px-28 ">
-        <NavMenu />
+<div className="flex">
+<UserSidebar />
+      <div className="pt-8 px-8 ">
+        <h1 className="text-2xl font-semibold text-orange-600">User Dashboard</h1>
         <div className="py-8">
           <h1 className="text-xl font-semibold my-2">Review for the users</h1>
           <p className="text-gray-600">
@@ -33,11 +34,11 @@ export default function ReviewRequest() {
                   User Name
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Task Completed
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Completed from both side
-                </th>
+                    Task Completed
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Task Incompleted
+                  </th>
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
@@ -53,11 +54,27 @@ export default function ReviewRequest() {
                     {data.userName}
                   </th>
                   <td className="px-6 py-4 ">
+                      <input
+                        type="checkbox"
+                        id="completed"
+                        name="completed"
+                        value="true"
+                      />
+                    </td>
+                    <td className="px-6 py-4 ">
+                      <input
+                        type="checkbox"
+                        id="incompleted"
+                        name="incompleted"
+                        value="false"
+                      />
+                    </td>
+                  {/* <td className="px-6 py-4 ">
                     <button
                       type="button"
                       class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2"
                     >
-                      <Link href="#" className="">
+                      <Link to="#" className="">
                         Task Completed
                       </Link>
                     </button>
@@ -97,13 +114,13 @@ export default function ReviewRequest() {
                         />
                       </svg>
                     </div>
-                  </td>
+                  </td> */}
                   <td className="px-6 py-4 ">
                     <button
                       type="button"
                       class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2"
                     >
-                      <Link href="/makeReview" className="">
+                      <Link to="/makeReview" className="">
                       Write a Review
                       </Link>
                     </button>
@@ -114,7 +131,8 @@ export default function ReviewRequest() {
           </table>
         </div>
       </div>
-      <Footer/>
+</div>
+     
     </>
   );
 }

@@ -23,13 +23,13 @@ export default function MakeReview() {
     <>
       <div className="flex">
         <UserSidebar />
-        <div className="pt-8 px-8 flex ">
-        <h1 className="text-2xl font-semibold text-orange-600">User Dashboard</h1>
-          <div>
+        <div className="pt-8 px-8  ">
+        <h1 className="text-2xl font-semibold text-orange-600 pb-12">User Dashboard</h1>
+          <div style={{ width: "600px" }}>
             <h1 className="text-xl font-semibold">
               Scroll to rate the service provider
             </h1>
-            <div>
+            <div >
               <p className="py-2">Your Rating: {rating}</p>
               <div className=" flex flex-row">
                 {[...Array(rating)].map((_, index) => (
@@ -55,7 +55,7 @@ export default function MakeReview() {
             ))}
             <textarea
               className="textarea-description border mt-4 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
-              style={{ height: "300px" }}
+              style={{ height: "240px" }}
             />
             <button
               type="button"
@@ -65,16 +65,18 @@ export default function MakeReview() {
               Submit
             </button>
           </div>
-          {isOpen && (
+        <div>
+        {isOpen && (
             <div>
-              <h1 className="text-lg font-semibold">Similar Services</h1>
-              <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-8 ">
+              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Similar Services</h1>
+              <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-6 ">
                 <Card />
               </div>
             </div>
           )}
         </div>
+        </div>
       </div>
-    </>
-  );
+    </>
+  );
 }

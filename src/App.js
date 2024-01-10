@@ -12,6 +12,9 @@ import ReviewAllowPage from "./pages/Dashboard/ServiceProviderDashboard/ReviewAl
 import MakeReservationbyUser from './pages/MakeReservation/MakeReservationbyUser';
 import MakeReview from './pages/Dashboard/UserDashboard/MakeReview';
 import ReviewRequest from "./pages/Dashboard/UserDashboard/ReviewRequest";
+import UserSidebar from "./pages/Dashboard/UserDashboard/UserSidebar";
+import SidebarLayout from "./pages/Dashboard/ServiceProviderDashboard/SidebarLayout";
+import UserProfile from "./pages/Dashboard/UserDashboard/UserProfile";
 function App() {
   return (
     <>
@@ -25,11 +28,15 @@ function App() {
         <Route path="/about" element={<AboutUs/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/reservation" element={<MakeReservationbyUser/>} />
+        {/* dashboard sidebar layout */}
+        <Route path="/serviceSideBar" element={<SidebarLayout/>} />
+        <Route path="/userSideBar" element={<UserSidebar/>} />
         {/* serviceprovider dashboard  */}
         <Route path="/listRequest" element={<ListRequest/>} />
         <Route path="/reviewAllowPage" element={<ReviewAllowPage/>}/>
         {/* user dashboard */}
         <Route path="/reviewRequest" element={<ReviewRequest/>}/>
+        <Route path="/userProfile" element={<UserProfile/>}/>
         <Route path="/makeReview" element={<MakeReview/>}/>
       </Routes>
     </>

@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { MdKeyboardBackspace } from "react-icons/md";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Input } from "../../components/Input/FromInput";
 import { useForm, FormProvider } from "react-hook-form";
 export default function LoginPage() {
@@ -109,12 +109,12 @@ export default function LoginPage() {
                  
                 </div>
                 <div className="flex items-center justify-between">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="text-sm font-medium text-primary-600 text-orange-400 hover:underline "
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <div className="pt-8">
                   <button
@@ -127,12 +127,12 @@ export default function LoginPage() {
                 </div>
                 <p className="text-sm font-light text-gray-600 ">
                   Don’t have an account yet?{" "}
-                  <a
-                    href="/Register"
+                  <Link
+                    to="/Register"
                     className="font-semibold  hover:underline text-orange-700"
                   >
                     Register
-                  </a>
+                  </Link>
                 </p>
               </form>
             </FormProvider>

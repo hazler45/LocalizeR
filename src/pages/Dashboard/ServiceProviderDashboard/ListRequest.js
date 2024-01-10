@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { NavMenu } from "../../../components/NavBar/NavMenu";
+import SidebarLayout  from "../ServiceProviderDashboard/SidebarLayout";
 import { Link } from 'react-router-dom';
-import Footer from "../../../components/Footer/Footer";
 export default function ListRequest() {
   const reservationData = [
     {
@@ -34,14 +33,12 @@ export default function ListRequest() {
   };
   return (
     <>
-      <div className="pt-8 sm:px-28 px-14 ">
-        <NavMenu />
+    <div className="flex">
+        <SidebarLayout />
+      <div className="pt-8 px-8 ">
+      <h1 className="text-2xl font-semibold text-orange-600">Service Provider Dashboard</h1>
         <div className="py-8">
-          {/* meantime navbar for dashboard */}
-          <div className="flex gap-8 text-blue-700 py-8">
-            <Link to="/listRequest">List of Request</Link>
-            <Link to="/reviewAllowPage">Review</Link>
-          </div>
+      
           <h1 className="text-xl font-semibold my-2">Request list from User</h1>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
@@ -82,7 +79,7 @@ export default function ListRequest() {
                   <td className="px-6 py-4">{data.budget}</td>
                   <td className="px-6 py-4">
                     <Link
-                      href="#"
+                      to="#"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       onClick={() => openPopup(data)}
                     >
@@ -95,8 +92,8 @@ export default function ListRequest() {
                       type="button"
                       class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2"
                     >
-                      <Link href="#" className="">
-                        Approve
+                      <Link to="#" className="">
+                        Accept
                       </Link>
                     </button>
                     <button
@@ -159,7 +156,7 @@ export default function ListRequest() {
           </div>
         </div>
       )}
-      <Footer />
+     </div>
     </>
   );
 }

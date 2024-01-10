@@ -29,7 +29,7 @@ export default function LoginPage() {
     await axios.post('http://localhost:5178/api/account/Login', formData,{
       headers:{
         'Content-Type': 'application/json'
-      }
+      },
     })
   .then(response => {
     navigate('/');
@@ -80,14 +80,16 @@ export default function LoginPage() {
                     htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Email
+                    Username
                   </label>
                   <Input
-                    type="email"
-                    name="email"
-                    id="email"
+                    type="username"
+                    name="username"
+                    value= {formData.username}
+                    onChange= {handleChange}
+                    id="username"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Enter your email"
+                    placeholder="Enter your username"
                     required=""
                   />
                 </div>
@@ -102,6 +104,8 @@ export default function LoginPage() {
                     type="password"
                     name="password"
                     id="password"
+                    value= {formData.password}
+                    onChange={handlePasswordChange}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required=""
@@ -118,7 +122,7 @@ export default function LoginPage() {
                 </div>
                 <div className="pt-8">
                   <button
-                   onClick={onSubmit}
+                   onClick={handleLoginClick}
                     type="submit"
                     className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-md px-5 py-2.5 text-center"
                   >

@@ -3,35 +3,25 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from "../../components/Input/FromInput";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, Controller } from "react-hook-form";
 export default function LoginPage() {
   const methods = useForm();
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
-  });
+  const { handleSubmit, control } = methods;
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    password: '',
-    username: ''
-    // Add more fields as needed
-  });
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const handlePasswordChange = (e) => {
-    setFormData({ ...formData, password: e.target.value });
-  };
   const handleLoginClick =  async(e) => {
+    const data= methods.getValues();cd
     e.preventDefault();
     console.log("Before Axios Request");
-    await axios.post('http://localhost:5178/api/account/Login', formData,{
+    console.log(data);
+    await axios.post('http://localhost:5178/api/account/Login', data,{
       headers:{
         'Content-Type': 'application/json'
       },
     })
   .then(response => {
+    localStorage.setItem('user', JSON.stringify(response.data));
     navigate('/');
     console.log(response.data);
   })
@@ -40,6 +30,13 @@ export default function LoginPage() {
     console.error('Error:', error);
   });
   console.log("After Axios Request");
+  await axios.get('http://localhost:5178/api/ServiceProvider/GetAllServiceProviders')
+  .then(response2=>{
+    localStorage.setItem('serviceProvider', JSON.stringify(response2.data));
+    console.log(response2.data);
+  }).catch(error=>{
+    console.error('Error:', error);
+  })
   };
 
   return (
@@ -69,50 +66,59 @@ export default function LoginPage() {
               </p>
             </div>
             <FormProvider {...methods}>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                noValidate
-                className="space-y-4 md:space-y-6"
-                action="#"
-              >
-                <div>
-                  <label
-                    htmlFor="username"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Username
-                  </label>
-                  <Input
-                    type="username"
-                    name="username"
-                    value= {formData.username}
-                    onChange= {handleChange}
-                    id="username"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Enter your username"
-                    required=""
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Password
-                  </label>
-                  <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value= {formData.password}
-                    onChange={handlePasswordChange}
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    required=""
-                  />
-                 
-                </div>
-                <div className="flex items-center justify-between">
+  <form
+    onSubmit={handleSubmit((data) => {
+      console.log(data); // This will contain your form data
+    })}
+    noValidate
+    className="space-y-4 md:space-y-6"
+    action="#"
+  >
+    <div>
+      <label
+        htmlFor="username"
+        className="block mb-2 text-sm font-medium text-gray-900"
+      >
+        Username
+      </label>
+      <Controller
+        name="username"
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            type="username"
+            id="username"
+            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Enter your username"
+            required=""
+          />
+        )}
+      />
+    </div>
+    <div>
+      <label
+        htmlFor="password"
+        className="block mb-2 text-sm font-medium text-gray-900"
+      >
+        Password
+      </label>
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            type="password"
+            id="password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="••••••••"
+            required=""
+          />
+        )}
+      />
+    </div>
+    <div className="flex items-center justify-between">
                   <Link
                     to="#"
                     className="text-sm font-medium text-primary-600 text-orange-400 hover:underline "
@@ -138,8 +144,9 @@ export default function LoginPage() {
                     Register
                   </Link>
                 </p>
-              </form>
-            </FormProvider>
+  </form>
+</FormProvider>
+
           </div>
         </div>
       </section>

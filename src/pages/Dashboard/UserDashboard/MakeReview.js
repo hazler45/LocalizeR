@@ -77,6 +77,6 @@ export default function MakeReview() {
         </div>
         </div>
       </div>
-    </>
-  );
+    </>
+  );
 }

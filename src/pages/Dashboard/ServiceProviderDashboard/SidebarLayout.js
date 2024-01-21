@@ -16,6 +16,11 @@ export default function SidebarLayout() {
           </Typography>
         </div>
         <List>
+        <ListItem>
+            <NavLink to="/serviceProviderProfile" className={location.pathname === "/serviceProviderProfile" ? "text-blue-500" : ""}>
+              Profile
+            </NavLink>
+          </ListItem>
           <ListItem>
             <NavLink to="/listRequest" className={location.pathname === "/listRequest" ? "text-blue-500" : ""}>
               List of Request

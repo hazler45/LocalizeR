@@ -43,7 +43,7 @@ export default function MakeReservationbyUser() {
   
       if (response.ok) {
         console.log("Reservation saved successfully");
-        // Optionally, you can redirect or update the UI here
+        
       } else {
         console.error("Failed to save reservation");
       }

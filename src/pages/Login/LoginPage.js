@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleLoginClick =  async(e) => {
-    const data= methods.getValues();cd
+    const data= methods.getValues();
     e.preventDefault();
     console.log("Before Axios Request");
     console.log(data);

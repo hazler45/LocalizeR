@@ -1,13 +1,9 @@
 import React from "react";
 import {cardData} from "../../map/data.js";
 import { StarIcon } from "../../utils/iconUtils.js";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 export default function Card() {
-  const navigate = useNavigate();
 
-  const navigateToMakeReservation = () => {
-    navigate('/reservation');
-  };
   return (
     <>
       {cardData.map((data) => {
@@ -17,17 +13,15 @@ export default function Card() {
               className="p-2.5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
             >
               <div className="">
-                <Link to="">
-                <h3 onClick={navigateToMakeReservation } className="font-semibold text-lg" >{data.title}</h3>
+                <Link to="/reservation">
+                <h3 className="font-semibold text-lg" >{data.title}</h3>
                 </Link>
                 
-                <Link to="">
+                <Link to="/reservation">
                   <img
-                  onClick={navigateToMakeReservation }
                     className="py-3 rounded-t-lg"
                     src="/Images/homeImg1.jpg"
-                    alt=" image"
-                    
+                    alt=""
                   />
                 </Link>
                 <div className="flex items-center">
@@ -41,7 +35,6 @@ export default function Card() {
                 <h5 className="  py-2 tracking-tight text-gray-700 ">
                   {data.description}
                 </h5>
-             
               </div>
             </div>
           </div>

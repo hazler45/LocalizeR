@@ -15,6 +15,7 @@ import ReviewRequest from "./pages/Dashboard/UserDashboard/ReviewRequest";
 import UserSidebar from "./pages/Dashboard/UserDashboard/UserSidebar";
 import SidebarLayout from "./pages/Dashboard/ServiceProviderDashboard/SidebarLayout";
 import UserProfile from "./pages/Dashboard/UserDashboard/UserProfile";
+import ServiceProviderProfile from "./pages/Dashboard/ServiceProviderDashboard/ServiceProviderProfile";
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
         <Route path="/serviceSideBar" element={<SidebarLayout/>} />
         <Route path="/userSideBar" element={<UserSidebar/>} />
         {/* serviceprovider dashboard  */}
+        <Route path="/serviceProviderProfile" element={<ServiceProviderProfile/>} />
         <Route path="/listRequest" element={<ListRequest/>} />
         <Route path="/reviewAllowPage" element={<ReviewAllowPage/>}/>
         {/* user dashboard */}

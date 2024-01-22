@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Collapse,
   Navbar,
@@ -43,6 +44,7 @@ export class NavMenu extends Component {
   render() 
   
   {
+    const { auth } = this.props;
     return (
       
       <header>
@@ -105,12 +107,19 @@ export class NavMenu extends Component {
                 </NavLink>
               </NavItem>
               <div className="md:ml-auto md:flex ">
-                <NavItem>
-                  <NavLink tag={Link} className="text-orange-400" to="/login">
-                    LoginPage
-                  </NavLink>
-                </NavItem>
-
+              {auth.user ? (
+              <NavItem>
+                <span className="text-orange-400">
+                  {auth.user.userName}!
+                </span>
+              </NavItem>
+            ) : (
+              <NavItem>
+                <NavLink tag={Link} className="text-orange-400" to="/login">
+                  LoginPage
+                </NavLink>
+              </NavItem>
+            )}
                 <NavItem>
                   <NavLink tag={Link} className="text-orange-400" to="/register">
                     Register
@@ -124,3 +133,7 @@ export class NavMenu extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(NavMenu)

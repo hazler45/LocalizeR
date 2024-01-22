@@ -9,6 +9,7 @@ import { setAuthData } from "../../state/reducers/authSlice";
 import { setServiceProviders } from "../../state/reducers/serviceProviderSlice";
 export default function LoginPage() {
   const methods = useForm();
+  const dispatch = useDispatch();
   const { handleSubmit, control } = methods;
   const navigate = useNavigate();
   const [password, setPassword] = useState("");

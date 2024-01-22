@@ -1,17 +1,24 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';  // Import Provider
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import store from '../src/state/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>  {/* Wrap your App with Provider */}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
 );
+
+// ... (rest of the file)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

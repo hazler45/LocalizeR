@@ -3,14 +3,14 @@ import axios  from "axios";
 import { useNavigate } from "react-router-dom";
 export default function RegisterAsServiceProvider() {
   const [formData, setFormData] = useState({
-    username: '',
+    userName: '',
     email: '',
-    businessname: '',
-    contactno: '',
+    businessName: '',
+    contactNo: '',
     location:'',
-    selectedService: '',
+    serviceType: '',
     password: '',
-    confirmpassword:'',
+    confirmPassword:''
 
     // Other form fields can be added here
   });
@@ -20,7 +20,7 @@ export default function RegisterAsServiceProvider() {
     const newConfirmPassword = e.target.value;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      confirmpassword: newConfirmPassword,
+      confirmPassword: newConfirmPassword,
     }));
   };
   const handleInputChange = (e) => {
@@ -54,7 +54,7 @@ export default function RegisterAsServiceProvider() {
   const handleServiceChange = (e) => {
     setFormData({
       ...formData,
-      selectedService: e.target.value,
+      serviceType: e.target.value,
     });
   };
   return (
@@ -69,10 +69,10 @@ export default function RegisterAsServiceProvider() {
           </label>
           <input
             type="text"
-            name="username"
+            name="userName"
             id="username"
             onChange={handleInputChange}
-            value={formData.username}
+            value={formData.userName}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
             placeholder="Enter your username"
             required=""
@@ -105,8 +105,8 @@ export default function RegisterAsServiceProvider() {
           </label>
           <input
             type="text"
-            name="businessname"
-            value={formData.businessname}
+            name="businessName"
+            value={formData.businessName}
             onChange={handleInputChange}
             id="business"
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -123,9 +123,9 @@ export default function RegisterAsServiceProvider() {
           </label>
           <input
             type="text"
-            name="contactno"
+            name="contactNo"
             id="contact"
-            value={formData.contactno}
+            value={formData.contactNo}
             onChange={handleInputChange}
             placeholder="Enter your phone no"
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -154,13 +154,13 @@ export default function RegisterAsServiceProvider() {
 
         <div className="flex gap-12">
           {[
-            'Plumber',
-            'Electrician',
-            'HVAC',
-            'Furniture',
-            'Cleaning',
-            'Moving',
-            'Contractors',
+            'plumber',
+            'electrician',
+            'hvac',
+            'furniture',
+            'cleaning',
+            'moving',
+            'contractors',
           ].map((service) => (
             <div key={service} className="radio-option">
               <input
@@ -168,7 +168,7 @@ export default function RegisterAsServiceProvider() {
                 id={`service_${service}`}
                 name="selectedService"
                 value={service}
-                checked={formData.selectedService === service}
+                checked={formData.serviceType === service}
                 onChange={handleServiceChange}
               />
               <label htmlFor={service}>{service}</label>
@@ -201,14 +201,14 @@ export default function RegisterAsServiceProvider() {
           </label>
           <input
             type={showPassword ? "text" : "password"}
-            name="confirmpassword"
+            name="confirmPassword"
             id="confirmpassword"
-            value={formData.confirmpassword}
+            value={formData.confirmPassword}
             onChange={handleConfirmPasswordChange}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
             required=""
           />
-          {formData.password !== formData.confirmpassword &&(
+          {formData.password !== formData.confirmPassword &&(
                     <p className="text-red-500 text-xs">Passwords do not match.</p>
                 )}
         </div>
@@ -219,7 +219,7 @@ export default function RegisterAsServiceProvider() {
               type="button"
               className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-md  px-5 py-2.5 text-center"
             >
-              Continue
+              Register
             </button>
           </div>
         </div>

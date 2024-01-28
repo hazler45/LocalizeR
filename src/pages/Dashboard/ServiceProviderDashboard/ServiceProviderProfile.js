@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import SidebarLayout from "./SidebarLayout.js";
 import { reservationData } from "../../../map/data.js";
+import axios from "axios";
 
 export default function ServiceProviderProfile() {
   const [description, setDescription] = useState("");
   const [isEditingDescription, setEditingDescription] = useState(false);
-  const [contactNo, setContactNo] = useState("");
-  const [location, setLocation] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [isEditingContactInfo, setEditingContactInfo] = useState(false);
+  const [serviceProviderData, setServiceProviderData]= useState({});
+  const serviceProviderId= sessionStorage.getItem('userId');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(serviceProviderId);
+        const apiUrlById = `http://localhost:5178/api/ServiceProvider/GetServiceProviderByServiceId?serviceId=${serviceProviderId}`;
+
+        // Make a GET request to the API
+        const response = await axios.get(apiUrlById);
+
+        // Set the fetched data to the state
+        console.log(response);
+        setServiceProviderData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [serviceProviderId]);
 
   const handleDescriptionChange = (newDescription) => {
-    setDescription(newDescription);
-    setEditingDescription(false);
   };
 
   const handleEditButtonClick = (data) => {
-    setContactNo(data.conatactNo);
-    setLocation(data.location);
-    setServiceType(data.serviceType);
-    setEditingContactInfo(true);
   };
 
   const handleContactInfoSave = () => {
-    setEditingContactInfo(false);
   };
 
   return (
@@ -31,12 +43,11 @@ export default function ServiceProviderProfile() {
       <div className="flex flex-1">
         <SidebarLayout />
         <div className="grid px-8 w-full">
-          {reservationData.map((data) => (
-            <div className="grid lg:flex gap-4 " key={data.id}>
+            <div className="grid lg:flex gap-4 ">
               <section className="lg:w-2/4">
                 <img
-                  src={data.img}
-                  alt={data.businessName}
+                  src={"https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg"}
+                  alt={serviceProviderData.businessName}
                   className="w-full h-3/5 object-cover"
                   onError={(e) => {
                     console.error("Error loading image:", e);
@@ -49,12 +60,12 @@ export default function ServiceProviderProfile() {
                     <h1 className="text-gray-600 font-medium text-base">
                       About the business :
                     </h1>{" "}
-                    {data.businessName}
+                    {serviceProviderData.businessName}
                   </h1>
                   <div>
                     {/* <p className="text-gray-600">{description}</p> */}
                     <p className="text-gray-600">
-                      {description || data.aboutBusiness}
+                      {description || serviceProviderData.aboutBusiness}
                     </p>
                     <button
                       onClick={() => setEditingDescription(true)}
@@ -71,23 +82,23 @@ export default function ServiceProviderProfile() {
                       <div className="p-2 text-sm  text-gray-600">
                         Contact No.
                         <p className="text-sm text-gray-900 ">
-                          {data.conatactNo}
+                          {serviceProviderData.conatactNo}
                         </p>
                       </div>
                       <div className="p-2 text-sm border-t text-gray-600">
                         Location
-                        <p className="text-sm text-gray-900">{data.location}</p>
+                        <p className="text-sm text-gray-900">{serviceProviderData.location}</p>
                       </div>
                       <div className="p-2 text-sm border-t text-gray-600">
                         Service Type
                         <p className="text-sm text-gray-900">
-                          {data.serviceType}
+                          {serviceProviderData.serviceType}
                         </p>
                       </div>
                 
                     </div>
                     <button
-                        onClick={() => handleEditButtonClick(data)}
+                        onClick={() => handleEditButtonClick("data")}
                         className="text-blue-500 underline"
                       >
                         Edit Contact Info
@@ -96,7 +107,6 @@ export default function ServiceProviderProfile() {
                 </div>
               </div>
             </div>
-          ))}
         </div>
       </div>
 
@@ -118,63 +128,6 @@ export default function ServiceProviderProfile() {
               </button>
               <button
                 onClick={() => handleDescriptionChange(description)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isEditingContactInfo && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8">
-            <h1 className="text-xl font-semibold mb-4">
-              Edit Contact Information
-            </h1>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Contact No.
-              </label>
-              <input
-                type="text"
-                value={contactNo}
-                onChange={(e) => setContactNo(e.target.value)}
-                className="w-full p-2 border rounded"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Location
-              </label>
-              <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full p-2 border rounded"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Service Type
-              </label>
-              <input
-                type="text"
-                value={serviceType}
-                onChange={(e) => setServiceType(e.target.value)}
-                className="w-full p-2 border rounded"
-              />
-            </div>
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={() => setEditingContactInfo(false)}
-                className="mr-2"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleContactInfoSave}
                 className="bg-blue-500 text-white px-4 py-2 rounded"
               >
                 Save

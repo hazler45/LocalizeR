@@ -4,16 +4,10 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from "../../components/Input/FromInput";
 import { useForm, FormProvider, Controller } from "react-hook-form";
-import { useDispatch } from 'react-redux';
-import { setAuthData } from "../../state/reducers/authSlice";
-import { setServiceProviders } from "../../state/reducers/serviceProviderSlice";
 export default function LoginPage() {
   const methods = useForm();
-  const dispatch = useDispatch();
   const { handleSubmit, control } = methods;
   const navigate = useNavigate();
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const handleLoginClick =  async(e) => {
     const data= methods.getValues();
     e.preventDefault();
@@ -25,8 +19,18 @@ export default function LoginPage() {
       },
     })
   .then(response => {
-    dispatch(setAuthData(response.data));
-    navigate('/');
+    const { authenticationResponse, role } = response.data;
+        sessionStorage.setItem('userId', authenticationResponse.id);
+        sessionStorage.setItem('location', authenticationResponse.location);
+        sessionStorage.setItem('userName', authenticationResponse.userName);
+        sessionStorage.setItem('contactNo', authenticationResponse.ContactNo);
+    if (role.result.includes('User')) {
+      // If the role is User, navigate to '/'
+      navigate('/');
+    } else {
+      // If the role is anything else, navigate to '/serviceProviderProfile'
+      navigate('/serviceProviderProfile');
+    }
     console.log(response.data);
   })
   .catch(error => {
@@ -34,15 +38,7 @@ export default function LoginPage() {
     console.error('Error:', error);
   });
   console.log("After Axios Request");
-  await axios.get('http://localhost:5178/api/ServiceProvider/GetAllServiceProviders')
-  .then(response2=>{
-    dispatch(setServiceProviders(response2.data));
-    console.log(response2.data);
-  }).catch(error=>{
-    console.error('Error:', error);
-  })
   };
-
   return (
     <>
       <section className="grid md:flex  ">

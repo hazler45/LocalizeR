@@ -16,10 +16,10 @@ import UserSidebar from "./pages/Dashboard/UserDashboard/UserSidebar";
 import SidebarLayout from "./pages/Dashboard/ServiceProviderDashboard/SidebarLayout";
 import UserProfile from "./pages/Dashboard/UserDashboard/UserProfile";
 import ServiceProviderProfile from "./pages/Dashboard/ServiceProviderDashboard/ServiceProviderProfile";
+import ServiceProvider from "./pages/ServiceProvider/ServiceProviderPage";
 function App() {
   return (
     <>
-   
       <Routes>
         <Route path="/" element={<Layout />} />
         <Route path="/login" element={<LoginPage/>} />
@@ -28,7 +28,7 @@ function App() {
         <Route path="/registerAsServiceProvider" element={<RegisterAsServiceProvider /> } />
         <Route path="/about" element={<AboutUs/>} />
         <Route path="/contact" element={<Contact/>} />
-        <Route path="/reservation" element={<MakeReservationbyUser/>} />
+        <Route path="/reservation/:serviceProviderId" element={<MakeReservationbyUser/>} />
         {/* dashboard sidebar layout */}
         <Route path="/serviceSideBar" element={<SidebarLayout/>} />
         <Route path="/userSideBar" element={<UserSidebar/>} />
@@ -39,7 +39,8 @@ function App() {
         {/* user dashboard */}
         <Route path="/reviewRequest" element={<ReviewRequest/>}/>
         <Route path="/userProfile" element={<UserProfile/>}/>
-        <Route path="/makeReview" element={<MakeReview/>}/>
+        <Route path="/makeReview/:serviceId" element={<MakeReview/>}/>
+        <Route path="service/:serviceId" element={<ServiceProvider/>}/>
       </Routes>
     </>
   );

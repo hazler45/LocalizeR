@@ -1,9 +1,30 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Card, Typography, List, ListItem } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function UserSidebar() {
   const location = useLocation();
+  const navigate= useNavigate();
+  const handleLogoutClick=  async(e) => {
+    try {
+      // Make a GET request to the logout API
+      const response= await axios.get("http://localhost:5178/api/Account/logout");
+
+      // Clear sessionStorage
+      console.log(response);
+      if(response.status= 200)
+      {
+      sessionStorage.clear();
+      navigate('/');
+      }
+      // Navigate to "/
+      
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  }
 
   return (
     <>
@@ -26,7 +47,9 @@ export default function UserSidebar() {
               Review Request
             </Link>
           </ListItem>
-          <ListItem>Log Out</ListItem>
+          <ListItem><button type="button"
+          onClick={handleLogoutClick}
+          >Log Out</button></ListItem>
         </List>
       </Card>
     </>

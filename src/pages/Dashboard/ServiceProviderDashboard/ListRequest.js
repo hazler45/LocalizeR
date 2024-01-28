@@ -1,22 +1,60 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
+import axios from "axios";
 import SidebarLayout  from "../ServiceProviderDashboard/SidebarLayout";
 import { Link } from 'react-router-dom';
 export default function ListRequest() {
-  const reservationData = [
-    {
-      userName: "John Doe",
-      selectedDateTime: "2024-01-09 14:30",
-      budget: "100",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-    {
-      userName: "John ",
-      selectedDateTime: "2024-01-09 14:30",
-      budget: "100",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-  ];
+   const serviceId= sessionStorage.getItem('userId');
+   const [reservationData, setReservationData] = useState([]);
+   console.log(serviceId);
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Construct the URL using the serviceId route parameter
+        const apiUrl = `http://localhost:5178/api/ServiceProvider/GetListofUsers?serviceId=${serviceId}`;
 
+        // Make a GET request to the API
+        const response = await axios.get(apiUrl);
+        console.log(response);
+
+        // Set the fetched data to the state
+        setReservationData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [serviceId]);
+ 
+  const acceptRequest = async (requestId) => {
+    try {
+        const response = await fetch(`http://localhost:5178/api/ServiceProvider/PostToAcceptedRequestList?requestId=${requestId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            console.log(response); // Log the response data if needed
+            window.alert("Request Accepted");
+        } else if (response.status === 500) {
+            window.alert("Request Already Accepted");
+        } else if (response.status === 404) {
+            window.alert("Request Not Found");
+        } else {
+            // Handle other error cases
+            console.error("Failed to accept request:", response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error); // Log any errors
+        // Throw the error for handling at the caller level if needed
+        throw error;
+    }
+};
+
+  
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [selectedReservation, setSelectedReservation] = useState(null);
 
@@ -55,7 +93,7 @@ export default function ListRequest() {
                   User Name
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Selected Time and Date
+                  Deadline
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Budget
@@ -67,15 +105,15 @@ export default function ListRequest() {
               </tr>
             </thead>
             <tbody>
-              {reservationData.map((data, index) => (
-                <tr key={index} className="bg-white border-b hover:bg-gray-50">
+              {reservationData.map((data) => (
+                <tr className="bg-white border-b hover:bg-gray-50">
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
-                    {data.userName}
+                    {data.requesterUsername}
                   </th>
-                  <td className="px-6 py-4">{data.selectedDateTime}</td>
+                  <td className="px-6 py-4">{data.deadline}</td>
                   <td className="px-6 py-4">{data.budget}</td>
                   <td className="px-6 py-4">
                     <Link
@@ -91,16 +129,15 @@ export default function ListRequest() {
                     <button
                       type="button"
                       class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2"
+                      onClick={()=>acceptRequest(data.requestId)}
                     >
-                      <Link to="#" className="">
-                        Accept
-                      </Link>
+                        Accept 
                     </button>
                     <button
                       type="button"
                       class="focus:outline-none text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 me-2 mb-2 "
                     >
-                      <Link href="#">Cancle</Link>
+                      <Link href="#">Reject</Link>
                     </button>
                   </td>
                 </tr>
@@ -133,11 +170,11 @@ export default function ListRequest() {
                       className="text-lg leading-6 font-medium text-gray-900"
                       id="modal-title"
                     >
-                      {selectedReservation.userName}
+                      {selectedReservation.requesterUsername}
                     </h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        {selectedReservation.description}
+                        {selectedReservation.requestDescription}
                       </p>
                     </div>
                   </div>

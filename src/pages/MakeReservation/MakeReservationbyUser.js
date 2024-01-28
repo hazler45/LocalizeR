@@ -1,15 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { NavMenu } from "../../components/NavBar/NavMenu";
 import Calendar from "../../components/Calender/Calender";
 import Comment from "./comments";
 import { reservationData } from "../../map/data.js";
+import { useParams } from "react-router-dom";
 export default function MakeReservationbyUser() {
   const [budget, setBudget] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const {serviceProviderId} = useParams();
+  const userId= sessionStorage.getItem('userId');
+  const [serviceProviderData, setServiceProviderData]= useState([]);
+  const imgvalue= "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg"
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(serviceProviderId);
+        const apiUrlById = `http://localhost:5178/api/ServiceProvider/GetServiceProviderByServiceId?serviceId=${serviceProviderId}`;
+
+        // Make a GET request to the API
+        const response = await axios.get(apiUrlById);
+
+        // Set the fetched data to the state
+        console.log(response);
+        setServiceProviderData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [serviceProviderId]);
 
   const handleDateChange = (newDate) => {
     console.log("Selected Date:", newDate);
+    console.log(userId);
     setDate(newDate);
   };
   
@@ -26,29 +54,35 @@ export default function MakeReservationbyUser() {
     e.preventDefault();
   
     try {
-      // Get the value of the budget input
-      const budgetInput = document.getElementById("budgetInput").value;
-  
-      // Log the data to the console
-      console.log("Reservation Data:", { date, description, budget: budgetInput });
+      // Prepare the reservation data
+      const reservationData = {
+        budget: budget,
+        deadline: date,
+        requestDetails: description,
+        serviceID: serviceProviderId,
+        UserID: userId,
+      };
   
       // Send the reservation data to the server
-      const response = await fetch("/api/reservations", {
+      const response = await fetch("http://localhost:5178/api/JobSequence/JobSequencing", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ date, description, budget: budgetInput }),
+        body: JSON.stringify(reservationData),
       });
   
       if (response.ok) {
         console.log("Reservation saved successfully");
-        
+        window.alert("Reservation saved successfully");
+        // Optionally, you can handle success actions here
       } else {
         console.error("Failed to save reservation");
+        // Optionally, you can handle failure actions here
       }
     } catch (error) {
       console.error("Error submitting reservation:", error);
+      // Optionally, you can handle error actions here
     }
   };
   
@@ -56,12 +90,12 @@ export default function MakeReservationbyUser() {
     <>
       <div className=" pt-8 px-28 ">
         <NavMenu />
-        {reservationData.map((data) => (
-          <div className="grid lg:flex gap-4 pt-12" key={data.id}>
+        
+          <div className="grid lg:flex gap-4 pt-12">
             <section className="lg:w-2/4">
               <img
-                src={data.img}
-                alt={data.businessName}
+                src={imgvalue}
+                alt={serviceProviderData.businessName}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   console.error("Error loading image:", e);
@@ -74,9 +108,9 @@ export default function MakeReservationbyUser() {
                   <h1 className="text-gray-600 font-medium text-base">
                     About the business :
                   </h1>{" "}
-                  {data.businessName}
+                  {serviceProviderData.businessName}
                 </h1>
-                <p className="text-gray-600">{data.aboutBusiness}</p>
+                <p className="text-gray-600">Your Business Description</p>
               </div>
               <div className="lg:flex pt-4 gap-8">
                 <form
@@ -134,17 +168,17 @@ export default function MakeReservationbyUser() {
                     <div className="p-2 text-sm  text-gray-600">
                       Contact No.
                       <p className="text-sm text-gray-900 ">
-                        {data.conatactNo}
+                        {serviceProviderData.contactNo}
                       </p>
                     </div>
                     <div className="p-2 text-sm border-t text-gray-600">
                       Location
-                      <p className="text-sm text-gray-900">{data.location}</p>
+                      <p className="text-sm text-gray-900">{serviceProviderData.location}</p>
                     </div>
                     <div className="p-2 text-sm border-t text-gray-600">
                       Service Type
                       <p className="text-sm text-gray-900">
-                        {data.serviceType}
+                        {serviceProviderData.serviceType}
                       </p>
                     </div>
                   </div>
@@ -152,7 +186,6 @@ export default function MakeReservationbyUser() {
               </div>
             </div>
           </div>
-        ))}
         <Comment />
       </div>
     </>

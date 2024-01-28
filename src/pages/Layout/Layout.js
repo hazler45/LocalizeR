@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,7 +6,20 @@ import { NavMenu } from "../../components/NavBar/NavMenu";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card/Card";
 import './Layout.module.css'
+import { FetchServiceProvider } from "../../components/Card/serviceprovider.service";
 export default function LandingPage() {
+
+  const [provider, setProvider] = useState([]);
+
+  useEffect(() => {
+    FetchServiceProvider().then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) => {
+          setProvider(body);
+        });
+      }
+    });
+  }, []);
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -29,7 +42,7 @@ export default function LandingPage() {
     <>
       <div className=" pt-8 px-28 selection:" style={landingPageStyle}>
         {/* this is navbar */}
-        <NavMenu />
+        <NavMenu provider={provider}/>
         {/* slider header */}
         <Slider {...sliderSettings}>
           <div className="slider-item">
@@ -66,7 +79,7 @@ export default function LandingPage() {
       LocalizeR is an online platform that serves as a space for connecting users to service providers. A service provider module can be an independent person or a group of people. The main theme behind this project is to help users find a proper household service, which for now is limited to a certain domain.
       </div>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4 px-28 ">
-        <Card />
+        <Card provider={provider}/>
       </div>
       <Footer />
     </>

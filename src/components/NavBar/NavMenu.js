@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import {
   Collapse,
   Navbar,
@@ -44,7 +43,7 @@ export class NavMenu extends Component {
   render() 
   
   {
-    const { auth } = this.props;
+    const userName= sessionStorage.getItem("userName");
     return (
       
       <header>
@@ -84,15 +83,26 @@ export class NavMenu extends Component {
                   Services
                 </DropdownToggle>
                 <DropdownMenu>
-                  {/* Add dropdown items here */}
-                  <DropdownItem tag={Link} to="/service1">
-                    Service 1
+                  <DropdownItem tag={Link} to="/service/1">
+                     Plumber
+                    </DropdownItem> 
+                  <DropdownItem tag={Link} to="/service/2">
+                    Electrician
                   </DropdownItem>
-                  <DropdownItem tag={Link} to="/service2">
-                    Service 2
+                  <DropdownItem tag={Link} to="/service/3">
+                   HVAC
                   </DropdownItem>
-                  <DropdownItem tag={Link} to="/service3">
-                    Service 3
+                  <DropdownItem tag={Link} to="/service/4">
+                   Cleaning
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/service/5">
+                   Furniture
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/service/6">
+                   Moving
+                  </DropdownItem>
+                  <DropdownItem tag={Link} to="/service/7">
+                   Contracts
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -107,24 +117,29 @@ export class NavMenu extends Component {
                 </NavLink>
               </NavItem>
               <div className="md:ml-auto md:flex ">
-              {auth.user ? (
-              <NavItem>
-                <span className="text-orange-400">
-                  {auth.user.userName}!
-                </span>
-              </NavItem>
-            ) : (
-              <NavItem>
-                <NavLink tag={Link} className="text-orange-400" to="/login">
-                  LoginPage
-                </NavLink>
-              </NavItem>
-            )}
-                <NavItem>
-                  <NavLink tag={Link} className="text-orange-400" to="/register">
-                    Register
-                  </NavLink>
-                </NavItem>
+              {userName ? (
+                  <NavItem>
+                    <NavLink tag={Link} className="text-orange-400" to="/userProfile/">
+                      {userName}
+                    </NavLink>
+                  </NavItem>
+                ) : (
+                  <NavItem>
+                    <NavLink tag={Link} className="text-orange-400" to="/login">
+                      LoginPage
+                    </NavLink>
+                  </NavItem>
+                )}
+                {userName ? (
+                  <NavItem>
+                  </NavItem>
+                ) : (
+                  <NavItem>
+                    <NavLink tag={Link} className="text-orange-400" to="/register">
+                      Register
+                    </NavLink>
+                  </NavItem>
+                )}
               </div>
             </ul>
           </Collapse>
@@ -133,7 +148,4 @@ export class NavMenu extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-export default connect(mapStateToProps)(NavMenu)
+export default (NavMenu)

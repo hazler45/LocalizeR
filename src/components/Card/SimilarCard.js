@@ -1,22 +1,21 @@
 import React from "react";
 import { StarIcon } from "../../utils/iconUtils.js";
 import {Link} from 'react-router-dom';
-export default function Card(props) {
-
+export default function SimilarCard(props) {
   return (
     <>
       {props.provider?.map((data) => {
         return (
-          <div key= {data.id}className="">
+          <div key={data.serviceId} className="">
             <div
               className="p-2.5 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow "
             >
               <div className="">
-                <Link to={"/reservation/"+data.id}>
-                <h3 className="font-semibold text-lg" >{data.businessName}</h3>
+                <Link to={"/reservation/"+data.serviceProvider.id}>
+                <h3 className="font-semibold text-lg" >{data.serviceProvider.businessName}</h3>
                 </Link>
                 
-                <Link to={"/reservation/"+data.id}>
+                <Link to={"/reservation/"+data.serviceProvider.id}>
                   <img
                     className="py-3 rounded-t-lg"
                     src="/Images/homeImg1.jpg"

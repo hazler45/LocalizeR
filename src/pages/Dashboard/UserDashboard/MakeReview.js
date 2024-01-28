@@ -1,8 +1,31 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import { StarIcon } from "../../../utils/iconUtils";
-import Card from "../../../components/Card/Card";
+import SimilarCard from "../../../components/Card/SimilarCard";
 import UserSidebar from "../UserDashboard/UserSidebar";
 export default function MakeReview() {
+  const {serviceId}= useParams();
+  const [serviceProviderData, setServiceProviderData] = useState({});
+  const[similarServiceProvider, setsimilarServiceProivder]= useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Construct the URL using the serviceId route parameter
+        const apiUrlById = `http://localhost:5178/api/ServiceProvider/GetServiceProviderByServiceId?serviceId=${serviceId}`;
+        // Make a GET request to the API
+        const response = await axios.get(apiUrlById);
+        console.log(response);
+        // Set the fetched data to the state
+        setServiceProviderData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [serviceId]);
   const [rating, setRating] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,15 +33,42 @@ export default function MakeReview() {
     setRating(parseInt(event.target.value, 10));
   };
 
-  function toggle() {
+  async function toggle() {
+    try {
+      // Prepare the reservation data
+      const ratingData = {
+        ratingvalue: rating,
+        servicelocation: serviceProviderData.location,
+        serviceid: serviceProviderData.id,
+      };
+  
+      // Send the reservation data to the server
+      const response = await fetch("http://localhost:5178/api/Ratings/PearsonSimilarityCalculation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ratingData),
+      });
+  
+      if (response.ok) {
+        console.log(response);
+        const responseData= await response.json();
+        console.log(responseData);
+        setsimilarServiceProivder(responseData);
+        console.log("Rating saved successfully");
+        console.log(similarServiceProvider);
+        // Optionally, you can handle success actions here
+      } else {
+        console.error("Failed to save reservation");
+        // Optionally, you can handle failure actions here
+      }
+    } catch (error) {
+      console.error("Error submitting reservation:", error);
+      // Optionally, you can handle error actions here
+    }
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }
-  const reservationData = [
-    {
-      userName: "Ayush Pumbling",
-    },
-  ];
-
   return (
     <>
       <div className="flex">
@@ -48,11 +98,11 @@ export default function MakeReview() {
                 onChange={handleSliderChange}
               />
             </div>
-            {reservationData.map((data, index) => (
-              <h1 className="text-2xl font-semibold" key={index}>
-                {data.userName}
+            
+              <h1 className="text-2xl font-semibold">
+                {serviceProviderData.businessName}
               </h1>
-            ))}
+            
             <textarea
               className="textarea-description border mt-4 border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
               style={{ height: "240px" }}
@@ -68,9 +118,9 @@ export default function MakeReview() {
         <div>
         {isOpen && (
             <div>
-              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Similar Services</h1>
+              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Most To Least Services</h1>
               <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-6 ">
-                <Card />
+                <SimilarCard provider={similarServiceProvider}/>
               </div>
             </div>
           )}

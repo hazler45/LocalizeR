@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Input } from "../../components/Input/FromInput";
-import { useForm, FormProvider } from "react-hook-form";
 export default function RegisterPageAsUSer() {
-  const methods = useForm();
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
-  });
   const [password, setPassword] = useState("");
   const navigate= useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -15,16 +9,16 @@ export default function RegisterPageAsUSer() {
     const newConfirmPassword = e.target.value;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      ConfirmPassword: newConfirmPassword,
+      confirmPassword: newConfirmPassword,
     }));
   };
   const [formData, setFormData] = useState({
-    UserName: '',
-    Password: '',
-    ConfirmPassword: '',
-    Email: '',
-    Location: '',
-    ContactNo: ''
+    userName: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    location: '',
+    contactNo: ''
   
   });
   const handleChange = (e) => {
@@ -34,6 +28,7 @@ export default function RegisterPageAsUSer() {
   const handleRegisterClick = async (e) => {
     e.preventDefault();
   console.log("Before Axios Post");
+  console.log("formData: ", formData)
    await axios.post('http://localhost:5178/api/Account/RegisterUser', formData, {
     headers:
     {
@@ -50,16 +45,10 @@ export default function RegisterPageAsUSer() {
   });
   console.log("After Axios Post");
   };
-
-
   return (
     <>
-      <FormProvider {...methods}>
         <form
-          onSubmit={(e) => e.preventDefault()}
-          noValidate
           className="space-y-4 md:space-y-4"
-          action="#"
         >
           <div>
             <label
@@ -68,11 +57,11 @@ export default function RegisterPageAsUSer() {
             >
               Email
             </label>
-            <Input
+            <input
               type="email"
-              name="Email"
+              name="email"
               id="email"
-              value={formData.Email}
+              value={formData.email}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               placeholder="Enter your email"
@@ -86,12 +75,12 @@ export default function RegisterPageAsUSer() {
           >
             Username
           </label>
-          <Input
+          <input
             type="text"
-            name="UserName"
+            name="userName"
             id="username"
             onChange={handleChange}
-            value={formData.UserName}
+            value={formData.userName}
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
             placeholder="Enter your username"
             required=""
@@ -104,11 +93,11 @@ export default function RegisterPageAsUSer() {
             >
               Location
             </label>
-            <Input
+            <input
                 type="text"
-                name="Location"
+                name="location"
                 onChange={handleChange}
-                value={formData.Location}
+                value={formData.location}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               placeholder="Enter your location"
               required=""
@@ -121,12 +110,12 @@ export default function RegisterPageAsUSer() {
             >
               Contact
             </label>
-            <Input
-               name="ContactNo"
+            <input
+               name="contactNo"
                type="text"
                id="contact"
                onChange={handleChange}
-               value={formData.ContactNo}
+               value={formData.contactNo}
               placeholder="Enter your phone no"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               required=""
@@ -139,13 +128,13 @@ export default function RegisterPageAsUSer() {
             >
               Password
             </label>
-            <Input
-               name="Password"
+            <input
+               name="password"
                id="password"
                type="password"
                onChange={handleChange}
                placeholder="Enter your password"
-               value={formData.Password}
+               value={formData.password}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               required=""
             />
@@ -157,16 +146,16 @@ export default function RegisterPageAsUSer() {
             >
               Confrim Password
             </label>
-            <Input
+            <input
               type={showPassword ? "text" : "password"}
               onChange={handleConfirmPasswordChange}
-              name="ConfirmPassword"
+              name="confirmPassword"
               id="confirmpassword"
               placeholder="••••••••"
-              value={formData.ConfirmPassword}
+              value={formData.confirmPassword}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
               required=""
-            /> {formData.Password !== formData.ConfirmPassword &&(
+            /> {formData.password !== formData.confirmPassword &&(
               <p className="text-red-500 text-xs">Passwords do not match.</p>
           )}
 
@@ -178,7 +167,7 @@ export default function RegisterPageAsUSer() {
             <button
            
             onClick={handleRegisterClick}
-              type="submit"
+              type="button"
               className="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-semibold rounded-lg  px-5 py-2.5 text-center"
             >
               Register
@@ -194,7 +183,7 @@ export default function RegisterPageAsUSer() {
             </a>
           </p>
         </form>
-      </FormProvider>
+      
     </>
   );
 }

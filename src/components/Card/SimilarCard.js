@@ -25,7 +25,7 @@ export default function SimilarCard(props) {
                   <div className="flex items-center">
                     {Array.from({ length: 5 }, (_, ind) => (
                       <div key={ind}>
-                        {StarIcon(ind < data.rating ? "fill-yellow-400" : "")}
+                        {StarIcon( "fill-yellow-400")}
                       </div>
                     ))}
                     {data.count5}
@@ -33,7 +33,7 @@ export default function SimilarCard(props) {
                   <div className="flex items-center">
                     {Array.from({ length: 4 }, (_, ind) => (
                       <div key={ind}>
-                        {StarIcon(ind < data.rating ? "fill-yellow-400" : "")}
+                        {StarIcon( "fill-yellow-400" )}
                       </div>
                     ))}
                     {data.count4}
@@ -41,7 +41,7 @@ export default function SimilarCard(props) {
                   <div className="flex items-center">
                     {Array.from({ length: 3 }, (_, ind) => (
                       <div key={ind}>
-                        {StarIcon(ind < data.rating ? "fill-yellow-400" : "")}
+                        {StarIcon("fill-yellow-400")}
                       </div>
                     ))}
                     {data.count3}
@@ -49,7 +49,7 @@ export default function SimilarCard(props) {
                   <div className="flex items-center">
                     {Array.from({ length: 2 }, (_, ind) => (
                       <div key={ind}>
-                        {StarIcon(ind < data.rating ? "fill-yellow-400" : "")}
+                        {StarIcon( "fill-yellow-400")}
                       </div>
                     ))}
                     {data.count2}
@@ -57,7 +57,7 @@ export default function SimilarCard(props) {
                   <div className="flex items-center">
                     {Array.from({ length: 1 }, (_, ind) => (
                       <div key={ind}>
-                        {StarIcon(ind < data.rating ? "fill-yellow-400" : "")}
+                        {StarIcon( "fill-yellow-400")}
                       </div>
                     ))}
                     {data.count1}

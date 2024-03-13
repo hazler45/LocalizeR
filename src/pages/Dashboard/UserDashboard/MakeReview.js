@@ -118,7 +118,7 @@ export default function MakeReview() {
         <div>
         {isOpen && (
             <div>
-              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Most To Least Services</h1>
+              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Most To Least Similar Services For Same Location</h1>
               <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-6 ">
                 <SimilarCard provider={similarServiceProvider}/>
               </div>

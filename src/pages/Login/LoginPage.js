@@ -13,18 +13,19 @@ export default function LoginPage() {
     e.preventDefault();
     console.log("Before Axios Request");
     console.log(data);
-    await axios.post('http://localhost:5178/api/account/Login', data,{
+    await axios.post('http://localhost:5178/api/Account/Login', data,{
       headers:{
         'Content-Type': 'application/json'
       },
     })
   .then(response => {
+    console.log(response);
     const { authenticationResponse, role } = response.data;
         sessionStorage.setItem('userId', authenticationResponse.id);
         sessionStorage.setItem('location', authenticationResponse.location);
         sessionStorage.setItem('userName', authenticationResponse.userName);
         sessionStorage.setItem('contactNo', authenticationResponse.ContactNo);
-    if (role.result.includes('User')) {
+    if (response.data.role.includes('User')) {
       // If the role is User, navigate to '/'
       navigate('/');
     } else {

@@ -41,6 +41,9 @@ export default function RegisterAsServiceProvider() {
     },
    })
   .then(response => {
+    if(response.ok){
+      window.alert("Registered Service Provider");
+    }
     navigate('/login');
     console.log(response.data);
   })
@@ -166,7 +169,7 @@ export default function RegisterAsServiceProvider() {
               <input
                 type="radio"
                 id={`service_${service}`}
-                name="selectedService"
+                name="serviceType"
                 value={service}
                 checked={formData.serviceType === service}
                 onChange={handleServiceChange}

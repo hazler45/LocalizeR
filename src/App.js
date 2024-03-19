@@ -39,7 +39,7 @@ function App() {
         {/* user dashboard */}
         <Route path="/reviewRequest" element={<ReviewRequest/>}/>
         <Route path="/userProfile" element={<UserProfile/>}/>
-        <Route path="/makeReview/:serviceId" element={<MakeReview/>}/>
+        <Route path="/makeReview/:serviceId/:requestId" element={<MakeReview/>}/>
         <Route path="service/:serviceId" element={<ServiceProvider/>}/>
       </Routes>
     </>

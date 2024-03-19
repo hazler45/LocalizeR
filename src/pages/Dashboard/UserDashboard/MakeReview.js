@@ -5,9 +5,10 @@ import { StarIcon } from "../../../utils/iconUtils";
 import SimilarCard from "../../../components/Card/SimilarCard";
 import UserSidebar from "../UserDashboard/UserSidebar";
 export default function MakeReview() {
-  const {serviceId}= useParams();
+  const {serviceId, requestId}= useParams();
   const [serviceProviderData, setServiceProviderData] = useState({});
   const[similarServiceProvider, setsimilarServiceProivder]= useState([]);
+  const [alreadyReviewedMessage, setAlreadyReviewedMessage] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,6 +41,7 @@ export default function MakeReview() {
         ratingvalue: rating,
         servicelocation: serviceProviderData.location,
         serviceid: serviceProviderData.id,
+        requestid: requestId
       };
   
       // Send the reservation data to the server
@@ -59,12 +61,17 @@ export default function MakeReview() {
         console.log("Rating saved successfully");
         console.log(similarServiceProvider);
         // Optionally, you can handle success actions here
-      } else {
-        console.error("Failed to save reservation");
+      } 
+      else if(response.status === 500){
+        const errorMessage = "Already Reviewed This Request"
+            setAlreadyReviewedMessage(errorMessage);
+      }
+      else {
+        console.error("Failed to Submit Rating ");
         // Optionally, you can handle failure actions here
       }
     } catch (error) {
-      console.error("Error submitting reservation:", error);
+      console.error("Error submitting rating:", error);
       // Optionally, you can handle error actions here
     }
     setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -115,16 +122,19 @@ export default function MakeReview() {
               Submit
             </button>
           </div>
-        <div>
-        {isOpen && (
-            <div>
-              <h1 className="text-2xl pt-8 font-semibold text-orange-600">Most To Least Similar Services For Same Location</h1>
-              <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-6 ">
-                <SimilarCard provider={similarServiceProvider}/>
-              </div>
-            </div>
-          )}
-        </div>
+          <div>
+                    {alreadyReviewedMessage ? (
+                        <p className="text-red-600">{alreadyReviewedMessage}</p>
+                    ) : isOpen && (
+                        <div>
+                            {/* Your existing code */}
+                            <h1 className="text-2xl pt-8 font-semibold text-orange-600">Most To Least Similar Services For Same Location</h1>
+                            <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-6 ">
+                            <SimilarCard provider={similarServiceProvider}/>
+                            </div>
+                        </div>
+                    )}
+                </div>
         </div>
       </div>
     </>
